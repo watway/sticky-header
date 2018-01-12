@@ -83,9 +83,15 @@
                 };
 
                 function calculateSize() {
+                    var width = header.outerWidth();
+                    if (scope.scrollBody) {
+                        var element = document.getElementById(scope.scrollBody.substring(1));
+                        width = computedStyle.getPropertyValue('width');
+                    }
+
                     clonedHeader.css({
                         top: scope.scrollStop,
-                        width: header.outerWidth(),
+                        width: width,
                         left: header.offset().left
                     });
 
