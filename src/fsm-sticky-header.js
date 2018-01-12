@@ -85,7 +85,9 @@
                 function calculateSize() {
                     var width = header.outerWidth();
                     if (scope.scrollBody) {
+                        // Delete # of scrollBody property
                         var element = document.getElementById(scope.scrollBody.substring(1));
+                        var computedStyle = window.getComputedStyle(element, null);
                         width = computedStyle.getPropertyValue('width');
                     }
 
