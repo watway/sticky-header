@@ -36,10 +36,7 @@
                         var clonedColumns = clonedHeader.find('th');
                         header.find('th').each(function (index, column) {
                             var clonedColumn = $(clonedColumns[index]);
-                            //clonedColumn.css( 'width', column.offsetWidth + 'px'); fixed thead width
-                            // fluid thead / table
-                            var finalWidthSet = column.offsetWidth / ($(window).innerWidth()-20)*100; // $(window) can be replace with a custom wrapper / container
-                            clonedColumn.css('width',finalWidthSet + '%');
+                            clonedColumn.css( 'width', 'calc(' + column.offsetWidth + 'px)'); //fixed thead width
                         });
                     }
                 };
@@ -86,9 +83,15 @@
                 };
 
                 function calculateSize() {
+                    var width = header.outerWidth();
+                    if (scope.scrollBody) {
+                        var element = document.getElementById(scope.scrollBody.substring(1));
+                        width = computedStyle.getPropertyValue('width');
+                    }
+
                     clonedHeader.css({
                         top: scope.scrollStop,
-                        width: header.outerWidth(),
+                        width: width,
                         left: header.offset().left
                     });
 
